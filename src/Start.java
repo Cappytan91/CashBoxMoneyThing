@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Collection;
 
 public class Start {
     public static void main(String[] args) {
@@ -8,9 +7,10 @@ public class Start {
 
     public Start(){
         Menu menu = new Menu(new ArrayList<>());
-        menu.addMenuItem( new Item("Coke", 0.99));
+        Menu order = new Menu();
+        menu.addMenuItem( new Item("Coke", 0.99, "Just a regular Coke Bruh"));
 
-        System.out.println(menu.getMenuItem("Coke").getName());
+        System.out.println(menu.getMenuItem("Coke").getName() + "\n\n" + menu.getMenuItem("Hipster's Delight").getPrice());
     }
 
 }
