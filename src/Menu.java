@@ -38,6 +38,8 @@ public class Menu {
         }catch (Exception e){
             System.out.println(e);
         }
+
+        addMenuItem(new Item("Null", 0.00, null));
     }
 
     public void addMenuItem(Item item){
@@ -56,11 +58,33 @@ public class Menu {
 
         for (Item i: items) {
             if(i.getName().toLowerCase().equals(menuItem.toLowerCase())){
+
+                System.out.println(i.getName().toLowerCase());
+                System.out.println(menuItem.toLowerCase());
+                System.out.println(i.getName().toLowerCase().equals(menuItem.toLowerCase()));
+
                 item = i;
             }
         }
-
         return item;
+    }
+
+    public void printRcpt(){
+        double sub = 0.00;
+        double total = 0.00;
+        double tax = 0.00;
+        double fees = 0.03;
+        final double TAX = 0.065;
+        for(Item i: items){
+            sub += i.getPrice();
+            System.out.println(i.getName() + "\n\t\t$" + String.format("%.2f",i.getPrice()));
+        }
+        total = (sub * TAX * fees) + sub;
+        tax = TAX * sub;
+        System.out.println("Subtotal: " + String.format("%.2f",sub));
+        System.out.println("Subtotal: " + String.format("%.2f",tax));
+        System.out.println("Subtotal: " + String.format("%.2f",total));
+
     }
 
 }

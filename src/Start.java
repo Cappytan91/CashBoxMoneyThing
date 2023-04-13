@@ -1,3 +1,4 @@
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -23,14 +24,17 @@ public class Start {
         System.out.println("What would you like to add to your order?");
         while (!input.toLowerCase().equals("done")){
             input = scan.nextLine();
-
-            try{
+            //System.out.println("Hio");
+            if(menu.getMenuItem(input) != null) {
                 order.addMenuItem(menu.getMenuItem(input));
-            }catch (Exception e){
-                System.out.println("Sorry we dont have that, is there anything else i can help with?");
+            }
+            else if(!input.toLowerCase().equals("done")) {
+                System.out.println("Sorry we don't have that, is there anything else i can help with?");
             }
 
         }
+
+        order.printRcpt();
 
 
     }
