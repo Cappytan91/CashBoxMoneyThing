@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 public class Start {
 
-    private static Menu menu;
-    private static Menu order;
+    public Menu menu;
+    public Menu order;
 
     public static void main(String[] args) {
          new Start();
@@ -15,8 +15,7 @@ public class Start {
         this.menu = new Menu(new ArrayList<>());
         this.order = new Menu();
 
-        new ahuuuuuu().setVisible(true);
-        loop();
+        //loop();
     }
 
     public void loop(){
@@ -40,11 +39,4 @@ public class Start {
 
     }
 
-    public static Menu getMenu() {
-        return menu;
-    }
-
-    public static Menu getOrder() {
-        return order;
-    }
 }

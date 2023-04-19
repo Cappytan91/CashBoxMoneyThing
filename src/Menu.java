@@ -87,4 +87,7 @@ public class Menu {
 
     }
 
+    public ArrayList<Item> getItems() {
+        return items;
+    }
 }
