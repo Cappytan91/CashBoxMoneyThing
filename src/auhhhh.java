@@ -5,6 +5,11 @@
 
 import com.formdev.flatlaf.FlatLightLaf;
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
 /**
  *
  * @author js4678
@@ -31,7 +36,12 @@ public class auhhhh extends javax.swing.JFrame {
 
         MenuTab = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton(){
+            @Override
+            public JToolTip createToolTip() {
+                return super.createToolTip();
+            }
+        };
         jButton3 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
@@ -49,12 +59,40 @@ public class auhhhh extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jButton2.setText("Caffeine Queen");
+        jButton2.setToolTipText("This strong and powerful coffee is a great way to stay awake.");
+        jButton2.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                System.out.println("BRUHHHHHHHHHHHHHHHH");
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -167,6 +205,9 @@ public class auhhhh extends javax.swing.JFrame {
         jLabel4.setText("Tax: ");
         jLabel4.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
+        jLabel5.setText("Description:");
+        jLabel5.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -199,7 +240,9 @@ public class auhhhh extends javax.swing.JFrame {
                                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
                                         .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addContainerGap(213, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
                 jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -223,7 +266,8 @@ public class auhhhh extends javax.swing.JFrame {
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                         .addComponent(jButton11)
                                                         .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -283,38 +327,56 @@ public class auhhhh extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+        start.order.addMenuItem(start.menu.getMenuItem("Caffeine Queen"));
+        writeToOrder();
     }
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+        start.order.addMenuItem(start.menu.getMenuItem("Java Jive"));
+        writeToOrder();
     }
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+        start.order.addMenuItem(start.menu.getMenuItem("Mocha Madness"));
+        writeToOrder();
     }
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+        start.order.addMenuItem(start.menu.getMenuItem("Funky Monkey"));
+        writeToOrder();
     }
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+        start.order.addMenuItem(start.menu.getMenuItem("Espresso Frenzy"));
+        writeToOrder();
     }
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+        start.order.addMenuItem(start.menu.getMenuItem("Cup of Joe"));
+        writeToOrder();
     }
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+        start.order.addMenuItem(start.menu.getMenuItem("Bean Around"));
+        writeToOrder();
     }
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+        start.order.addMenuItem(start.menu.getMenuItem("Dirty Chai"));
+        writeToOrder();
     }
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+        start.order.addMenuItem(start.menu.getMenuItem("The Buzz"));
+        writeToOrder();
     }
 
     public void writeToOrder(){
@@ -333,6 +395,11 @@ public class auhhhh extends javax.swing.JFrame {
         jLabel3.setText("Subtotal: $" + String.format("%.2f", sub));
         jLabel4.setText("Tax: $" + String.format("%.2f", tax));
         jLabel2.setText("Total: $" + String.format("%.2f", sub + tax));
+    }
+
+    public void writeToDescripton(Item item){
+        String desc = item.getDescription();
+        jLabel1.setText("<html>" + desc + "</html>");
     }
 
     /**
@@ -397,6 +464,7 @@ public class auhhhh extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
 
     // End of variables declaration
 }
