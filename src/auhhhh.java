@@ -36,12 +36,7 @@ public class auhhhh extends javax.swing.JFrame {
 
         MenuTab = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton(){
-            @Override
-            public JToolTip createToolTip() {
-                return super.createToolTip();
-            }
-        };
+        jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
@@ -85,7 +80,7 @@ public class auhhhh extends javax.swing.JFrame {
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                System.out.println("BRUHHHHHHHHHHHHHHHH");
+                writeToDescripton(start.menu.getMenuItem("Caffeine Queen"));
             }
 
             @Override
@@ -399,7 +394,7 @@ public class auhhhh extends javax.swing.JFrame {
 
     public void writeToDescripton(Item item){
         String desc = item.getDescription();
-        jLabel1.setText("<html>" + desc + "</html>");
+        jLabel5.setText("<html>" + desc + "</html>");
     }
 
     /**
