@@ -628,7 +628,7 @@ public class auhhhh extends javax.swing.JFrame {
 
     public void writeToDescripton(Item item){
         String desc = item.getDescription();
-        jLabel5.setText("<html>" + desc + "</html>");
+        jLabel5.setText("<html> Description:<br/>" + desc + "</html>");
     }
 
     /**

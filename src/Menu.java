@@ -59,9 +59,9 @@ public class Menu {
         for (Item i: items) {
             if(i.getName().toLowerCase().equals(menuItem.toLowerCase())){
 
-                System.out.println(i.getName().toLowerCase());
-                System.out.println(menuItem.toLowerCase());
-                System.out.println(i.getName().toLowerCase().equals(menuItem.toLowerCase()));
+                //System.out.println(i.getName().toLowerCase());
+                //System.out.println(menuItem.toLowerCase());
+                //System.out.println(i.getName().toLowerCase().equals(menuItem.toLowerCase()));
 
                 item = i;
             }
