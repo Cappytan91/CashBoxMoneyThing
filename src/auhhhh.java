@@ -57,6 +57,8 @@ public class auhhhh extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
+        ImageIcon img = new ImageIcon("src/res/Logo.png");
+        this.setIconImage(img.getImage());
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 

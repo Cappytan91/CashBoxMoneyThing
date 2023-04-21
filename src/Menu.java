@@ -27,10 +27,10 @@ public class Menu {
         while ((strLine = br.readLine()) != null)   {
             // Print the content on the console
             //System.out.println (strLine);
-
-            String[] arr = strLine.split("\\s*,\\s*");
-            addMenuItem(new Item(arr[0], Double.valueOf(arr[1]), arr[2]));
-
+            if(!firstTwo(strLine).equals("//")){
+                String[] arr = strLine.split("\\s*~\\s*");
+                addMenuItem(new Item(arr[0], Double.valueOf(arr[1]), arr[2]));
+            }
         }
 
         //Close the input stream
@@ -51,6 +51,16 @@ public class Menu {
 
     public Item getMenuItem(int index){
         return items.get(index);
+    }
+
+    public String firstTwo(String str) {
+
+        if(str.length()<2){
+            return str;
+        }
+        else{
+            return str.substring(0,2);
+        }
     }
 
     public Item getMenuItem(String menuItem){
