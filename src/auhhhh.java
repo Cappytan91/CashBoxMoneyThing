@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 /**
  *
@@ -23,6 +24,8 @@ public class auhhhh extends javax.swing.JFrame {
         initComponents();
         this.start = new Start();
         this.Order = "Order:";
+        this.Tables = new ArrayList<Table>();
+        this.Tables.add(new Table(100, 100, 75, 75, 6));
     }
 
     /**
@@ -55,7 +58,26 @@ public class auhhhh extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel(){
+            public void paint(Graphics g)
+            {
+                super.paint(g);
+
+                for (Table t: Tables) {
+                    t.draw(g);
+                }
+
+                //draw circle outline
+                //g.drawOval(50,50,100,100);
+
+                //set color to RED
+                //So after this, if you draw anything, all of it's result will be RED
+                //g.setColor(Color.RED);
+
+                //fill circle with RED
+                //g.fillOval(50,50,100,100);
+            }
+        };
         jPanel3 = new javax.swing.JPanel();
         ImageIcon img = new ImageIcon("src/res/Logo.png");
         this.setIconImage(img.getImage());
@@ -436,7 +458,7 @@ public class auhhhh extends javax.swing.JFrame {
         jLabel4.setText("Tax: ");
         jLabel4.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
-        jLabel5.setText("Description:");
+        jLabel5.setText("<html>Item: <br/>Price: <br/>Description:</html>");
         jLabel5.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -521,7 +543,7 @@ public class auhhhh extends javax.swing.JFrame {
                         .addGap(0, 328, Short.MAX_VALUE)
         );
 
-        MenuTab.addTab("tab2", jPanel2);
+        MenuTab.addTab("Tables", jPanel2);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -630,7 +652,7 @@ public class auhhhh extends javax.swing.JFrame {
 
     public void writeToDescripton(Item item){
         String desc = item.getDescription();
-        jLabel5.setText("<html>" + "Item: " + item.getName() + "<br/>" + " Description:<br/>" + desc + "</html>");
+        jLabel5.setText("<html>" + "Item: " + item.getName() + "<br/><hr/>Price: $" + String.format("%.2f", item.getPrice()) + "<br/><hr/>Description:<br/>" + desc + "</html>");
     }
 
     /**
@@ -696,6 +718,7 @@ public class auhhhh extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private ArrayList<Table> Tables;
 
     // End of variables declaration
 }
