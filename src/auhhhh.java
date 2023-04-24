@@ -7,6 +7,7 @@ import com.formdev.flatlaf.FlatLightLaf;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ public class auhhhh extends javax.swing.JFrame {
         this.Order = "Order:";
         this.Tables = new ArrayList<Table>();
         this.Tables.add(new Table(100, 100, 75, 75, 12));
+        this.editMode = false;
     }
 
     /**
@@ -58,6 +60,7 @@ public class auhhhh extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        editButton = new JButton();
         jPanel2 = new javax.swing.JPanel(){
             public void paint(Graphics g)
             {
@@ -79,7 +82,46 @@ public class auhhhh extends javax.swing.JFrame {
             }
 
         };
-        jPanel2.addMouseListener(new MyMouseListener());
+        jPanel2.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                if (editMode){
+                    Tables.add(new Table(e.getX() - 75 / 2, e.getY() - 75 / 2, 75, 75, 0));
+                    auhhhh.super.repaint();
+                }
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
+        editButton.setText("Edit Mode");
+        editButton.addActionListener(new java.awt.event.ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(editMode){
+                    editMode = false;
+                }else{
+                    editMode = true;
+                }
+            }
+        });
 
         jPanel3 = new javax.swing.JPanel();
         ImageIcon img = new ImageIcon("src/res/Logo.png");
@@ -722,26 +764,9 @@ public class auhhhh extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private ArrayList<Table> Tables;
+    private JButton editButton;
+    private boolean editMode;
 
     // End of variables declaration
 }
 
-class MyMouseListener implements MouseListener {
-
-    public boolean mouseDown = false;
-    public void mouseClicked(MouseEvent event) {
-        //System.out.println("entered");
-    }
-    public void mouseEntered(MouseEvent event) {
-        //System.out.println("entered");
-    }
-    public void mouseExited(MouseEvent event) {
-        //System.out.println("exited");
-    }
-    public void mousePressed(MouseEvent event) {
-        mouseDown = true;
-    }
-    public void mouseReleased(MouseEvent event) {
-        mouseDown = false;
-    }
-}
