@@ -25,7 +25,7 @@ public class auhhhh extends javax.swing.JFrame {
         this.start = new Start();
         this.Order = "Order:";
         this.Tables = new ArrayList<Table>();
-        this.Tables.add(new Table(100, 100, 75, 75, 6));
+        this.Tables.add(new Table(100, 100, 75, 75, 12));
     }
 
     /**
@@ -77,7 +77,10 @@ public class auhhhh extends javax.swing.JFrame {
                 //fill circle with RED
                 //g.fillOval(50,50,100,100);
             }
+
         };
+        jPanel2.addMouseListener(new MyMouseListener());
+
         jPanel3 = new javax.swing.JPanel();
         ImageIcon img = new ImageIcon("src/res/Logo.png");
         this.setIconImage(img.getImage());
@@ -721,4 +724,24 @@ public class auhhhh extends javax.swing.JFrame {
     private ArrayList<Table> Tables;
 
     // End of variables declaration
+}
+
+class MyMouseListener implements MouseListener {
+
+    public boolean mouseDown = false;
+    public void mouseClicked(MouseEvent event) {
+        //System.out.println("entered");
+    }
+    public void mouseEntered(MouseEvent event) {
+        //System.out.println("entered");
+    }
+    public void mouseExited(MouseEvent event) {
+        //System.out.println("exited");
+    }
+    public void mousePressed(MouseEvent event) {
+        mouseDown = true;
+    }
+    public void mouseReleased(MouseEvent event) {
+        mouseDown = false;
+    }
 }
