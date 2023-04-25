@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 public class Table {
@@ -30,6 +31,15 @@ public class Table {
         }
     }
 
+    public boolean coliding(MouseEvent evt){
+        double xDiff = evt.getX() - (x + width/2);
+        double yDiff = evt.getY() - (y + width/2);
+
+        double distance = Math.sqrt((Math.pow(xDiff, 2) + Math.pow(yDiff, 2)));
+
+        return distance < (1 + width/2);
+    }
+
     public void draw(Graphics g){
         g.drawOval(x, y, width, height);
         for (Chair c: chairs) {
@@ -37,4 +47,7 @@ public class Table {
         }
     }
 
+    public ArrayList<Chair> getChairs() {
+        return chairs;
+    }
 }

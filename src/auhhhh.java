@@ -68,6 +68,7 @@ public class auhhhh extends javax.swing.JFrame {
 
                 for (Table t: Tables) {
                     t.draw(g);
+
                 }
 
                 //draw circle outline
@@ -99,6 +100,12 @@ public class auhhhh extends javax.swing.JFrame {
                     Tables.add(new Table(e.getX() - 75 / 2, e.getY() - 75 / 2, 75, 75, 0));
                     auhhhh.super.repaint();
                 }
+                for (Table t: Tables) {
+                    if(t.coliding(e)){
+                        System.out.println("Pressed :)");
+                    }
+                }
+
             }
 
             @Override
