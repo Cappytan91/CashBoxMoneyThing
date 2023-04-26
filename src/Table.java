@@ -58,4 +58,17 @@ public class Table {
     public ArrayList<Chair> getChairs() {
         return chairs;
     }
+
+    public int getHeight() {
+        return height;
+    }
+    public int getWidth() {
+        return width;
+    }
+    public int getX() {
+        return x;
+    }
+    public int getY() {
+        return y;
+    }
 }

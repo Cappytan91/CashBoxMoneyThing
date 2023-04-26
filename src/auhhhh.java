@@ -10,6 +10,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.*;
 import java.util.ArrayList;
 
 /**
@@ -61,7 +62,7 @@ public class auhhhh extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         editButton = new JButton();
-        saveButton = new JButton();
+        loadButton = new JButton();
         exportButton = new JButton();
         jPanel2 = new javax.swing.JPanel(){
             public void paint(Graphics g)
@@ -589,9 +590,19 @@ public class auhhhh extends javax.swing.JFrame {
             }
         });
 
-        saveButton.setText("Save");
+        loadButton.setText("Load");
+        loadButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loadButtonActionPerformed(evt);
+            }
+        });
 
         exportButton.setText("Export");
+        exportButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exportButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -601,7 +612,7 @@ public class auhhhh extends javax.swing.JFrame {
                                 .addContainerGap(744, Short.MAX_VALUE)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(editButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(saveButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(loadButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(exportButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addContainerGap())
         );
@@ -611,7 +622,7 @@ public class auhhhh extends javax.swing.JFrame {
                                 .addContainerGap(227, Short.MAX_VALUE)
                                 .addComponent(editButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(saveButton)
+                                .addComponent(loadButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(exportButton)
                                 .addGap(8, 8, 8))
@@ -645,6 +656,56 @@ public class auhhhh extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>
+
+    private void exportButtonActionPerformed(ActionEvent evt) {
+
+        BufferedWriter output = null;
+        try {
+            File file = new File("tableLayout.txt");
+            output = new BufferedWriter(new FileWriter(file));
+            for (Table t: Tables) {
+                output.write(t.getX() +", " + t.getY() + ", " + t.getWidth() + ", " + t.getHeight() + ", " + (t.getChairs().size() - 1));
+            }
+
+        } catch ( IOException e ) {
+            e.printStackTrace();
+        } finally {
+            if ( output != null ) {
+                try {
+                    output.close();
+                }catch (IOException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+
+    }
+
+    private void loadButtonActionPerformed(ActionEvent evt) {
+        try {
+
+            FileInputStream fstream = new FileInputStream("tableLayout.txt");
+            BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
+
+            String strLine;
+
+            //Read File Line By Line
+            while ((strLine = br.readLine()) != null) {
+                // Print the content on the console
+                //System.out.println (strLine);
+                String[] arr = strLine.split("\\s*,\\s*");
+
+                Tables.clear();
+                Tables.add(new Table(Integer.parseInt(arr[0]), Integer.parseInt(arr[1]), Integer.parseInt(arr[2]), Integer.parseInt(arr[3]), Integer.parseInt(arr[4])));
+                jPanel2.repaint();
+            }
+            //Close the input stream
+            fstream.close();
+        }catch (Exception e){
+            System.out.println(e);
+        }
+
+    }
 
     private void editButtonActionPerformed(ActionEvent evt) {
         if(editMode){
@@ -802,7 +863,7 @@ public class auhhhh extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private ArrayList<Table> Tables;
     private JButton editButton;
-    private JButton saveButton;
+    private JButton loadButton;
     private JButton exportButton;
     private boolean editMode;
 
