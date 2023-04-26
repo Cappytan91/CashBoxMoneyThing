@@ -61,6 +61,8 @@ public class auhhhh extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         editButton = new JButton();
+        saveButton = new JButton();
+        exportButton = new JButton();
         jPanel2 = new javax.swing.JPanel(){
             public void paint(Graphics g)
             {
@@ -96,15 +98,22 @@ public class auhhhh extends javax.swing.JFrame {
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                if (editMode){
-                    Tables.add(new Table(e.getX() - 75 / 2, e.getY() - 75 / 2, 75, 75, 0));
-                    auhhhh.super.repaint();
-                }
                 for (Table t: Tables) {
                     if(t.coliding(e)){
                         System.out.println("Pressed :)");
+                        if(t.heyo){
+                            t.heyo = false;
+                        }else{
+                            t.heyo = true;
+                        }
                     }
                 }
+
+                if (editMode){
+                    Tables.add(new Table(e.getX() - 75 / 2, e.getY() - 75 / 2, 75, 75, 5));
+                }
+
+                auhhhh.super.repaint();
 
             }
 
@@ -116,17 +125,6 @@ public class auhhhh extends javax.swing.JFrame {
             @Override
             public void mouseExited(MouseEvent e) {
 
-            }
-        });
-        editButton.setText("Edit Mode");
-        editButton.addActionListener(new java.awt.event.ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(editMode){
-                    editMode = false;
-                }else{
-                    editMode = true;
-                }
             }
         });
 
@@ -584,15 +582,39 @@ public class auhhhh extends javax.swing.JFrame {
 
         MenuTab.addTab("Menu", jPanel1);
 
+        editButton.setText("Edit");
+        editButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editButtonActionPerformed(evt);
+            }
+        });
+
+        saveButton.setText("Save");
+
+        exportButton.setText("Export");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
                 jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 822, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addContainerGap(744, Short.MAX_VALUE)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(editButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(saveButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(exportButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
                 jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 328, Short.MAX_VALUE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addContainerGap(227, Short.MAX_VALUE)
+                                .addComponent(editButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(saveButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(exportButton)
+                                .addGap(8, 8, 8))
         );
 
         MenuTab.addTab("Tables", jPanel2);
@@ -623,6 +645,14 @@ public class auhhhh extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>
+
+    private void editButtonActionPerformed(ActionEvent evt) {
+        if(editMode){
+            editMode = false;
+        }else{
+            editMode = true;
+        }
+    }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
@@ -772,6 +802,8 @@ public class auhhhh extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private ArrayList<Table> Tables;
     private JButton editButton;
+    private JButton saveButton;
+    private JButton exportButton;
     private boolean editMode;
 
     // End of variables declaration

@@ -127,12 +127,12 @@ public class PrinterService implements Printable {
             System.out.println(printerService.getPrinters());
 
             //print some stuff. Change the printer name to your thermal printer name.
-            printerService.printString("TSP143IIILAN", "\n\n testing testing 1 2 3eeeee \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+            printerService.printString("TSP143III", "\n\n testing testing 1 2 3eeeee \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 
             // cut that paper!
             byte[] cutP = new byte[] { 0x1d, 'V', 1 };
 
-            printerService.printBytes("TSP143IIILAN", cutP);
+            printerService.printBytes("Star TSP143IIILAN Cutter", cutP);
 
 
 

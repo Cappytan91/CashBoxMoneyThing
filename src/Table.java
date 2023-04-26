@@ -6,6 +6,7 @@ public class Table {
 
     private int x, y, width, height;
     private ArrayList<Chair> chairs;
+    public boolean heyo;
 
     public Table(int x, int y, int width, int height, int amountOfChairs){
         this.x = x;
@@ -13,6 +14,7 @@ public class Table {
         this.width = width;
         this.height = height;
         this.chairs = new ArrayList<Chair>();
+        this.heyo = false;
         setUpChairs(amountOfChairs);
     }
 
@@ -41,6 +43,12 @@ public class Table {
     }
 
     public void draw(Graphics g){
+        if(heyo){
+            g.setColor(Color.GREEN);
+            g.fillOval(x,y,width,height);
+        }
+        g.setColor(Color.BLACK);
+
         g.drawOval(x, y, width, height);
         for (Chair c: chairs) {
             c.draw(g);
