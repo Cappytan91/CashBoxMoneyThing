@@ -7,9 +7,7 @@ import com.formdev.flatlaf.FlatLightLaf;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 import java.io.*;
 import java.util.ArrayList;
 
@@ -29,6 +27,7 @@ public class auhhhh extends javax.swing.JFrame {
         this.Tables = new ArrayList<Table>();
         this.Tables.add(new Table(100, 100, 75, 75, 12));
         this.editMode = false;
+        this.tempTable = new Table(0, 0, 75, 75, 4);
     }
 
     /**
@@ -86,6 +85,29 @@ public class auhhhh extends javax.swing.JFrame {
             }
 
         };
+
+        jPanel2.addMouseWheelListener(new MouseWheelListener() {
+            @Override
+            public void mouseWheelMoved(MouseWheelEvent e) {
+                e.getWheelRotation();
+            }
+        });
+
+        jPanel2.addMouseMotionListener(new MouseMotionListener() {
+            @Override
+            public void mouseDragged(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                if(editMode){
+                    tempTable.setX(e.getX());
+                    tempTable.setY(e.getY());
+                }
+            }
+        });
+
         jPanel2.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -664,9 +686,9 @@ public class auhhhh extends javax.swing.JFrame {
             File file = new File("tableLayout.txt");
             output = new BufferedWriter(new FileWriter(file));
             for (Table t: Tables) {
-                output.write(t.getX() +", " + t.getY() + ", " + t.getWidth() + ", " + t.getHeight() + ", " + (t.getChairs().size() - 1));
+                output.write(t.getX() +", " + t.getY() + ", " + t.getWidth() + ", " + t.getHeight() + ", " + (t.getChairs().size() - 1) + "\n");
             }
-
+            output.close();
         } catch ( IOException e ) {
             e.printStackTrace();
         } finally {
@@ -688,14 +710,14 @@ public class auhhhh extends javax.swing.JFrame {
             BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
 
             String strLine;
-
+            Tables.clear();
             //Read File Line By Line
             while ((strLine = br.readLine()) != null) {
                 // Print the content on the console
                 //System.out.println (strLine);
                 String[] arr = strLine.split("\\s*,\\s*");
 
-                Tables.clear();
+
                 Tables.add(new Table(Integer.parseInt(arr[0]), Integer.parseInt(arr[1]), Integer.parseInt(arr[2]), Integer.parseInt(arr[3]), Integer.parseInt(arr[4])));
                 jPanel2.repaint();
             }
@@ -866,6 +888,7 @@ public class auhhhh extends javax.swing.JFrame {
     private JButton loadButton;
     private JButton exportButton;
     private boolean editMode;
+    private Table tempTable;
 
     // End of variables declaration
 }
