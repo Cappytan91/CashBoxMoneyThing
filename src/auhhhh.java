@@ -68,6 +68,10 @@ public class auhhhh extends javax.swing.JFrame {
             {
                 super.paint(g);
 
+                if(editMode){
+                    tempTable.draw(g);
+                }
+
                 for (Table t: Tables) {
                     t.draw(g);
 
@@ -91,7 +95,7 @@ public class auhhhh extends javax.swing.JFrame {
             public void mouseWheelMoved(MouseWheelEvent e) {
                 if(e.getWheelRotation() > 0){
                     if(tempTable.getChairs().size() <= 1){
-                        
+                        tempTable.updateChairs(tempTable.getChairs().size() - 1);
                     }
                 }
             }
@@ -106,9 +110,8 @@ public class auhhhh extends javax.swing.JFrame {
             @Override
             public void mouseMoved(MouseEvent e) {
                 if(editMode){
-                    tempTable.setX(e.getX());
-                    tempTable.setY(e.getY());
-                    tempTable.draw(getGraphics());
+                    tempTable.update(e.getX(), e.getY(), 5);
+                    //tempTable.draw(jPanel2.getGraphics());
                     jPanel2.repaint();
                 }
             }
@@ -142,7 +145,7 @@ public class auhhhh extends javax.swing.JFrame {
                     Tables.add(new Table(e.getX() - 75 / 2, e.getY() - 75 / 2, 75, 75, 5));
                 }
 
-                auhhhh.super.repaint();
+                jPanel2.repaint();
 
             }
 
@@ -741,6 +744,7 @@ public class auhhhh extends javax.swing.JFrame {
         }else{
             editMode = true;
         }
+        jPanel2.repaint();
     }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {

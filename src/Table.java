@@ -7,6 +7,7 @@ public class Table {
     private int x, y, width, height;
     private ArrayList<Chair> chairs;
     public boolean heyo;
+    private Graphics g;
 
     public Table(int x, int y, int width, int height, int amountOfChairs){
         this.x = x;
@@ -33,6 +34,10 @@ public class Table {
         }
     }
 
+    public void updateChairs(int amountOfChairs){
+        setUpChairs(amountOfChairs);
+    }
+
     public boolean coliding(MouseEvent evt){
         double xDiff = evt.getX() - (x + width/2);
         double yDiff = evt.getY() - (y + width/2);
@@ -53,6 +58,15 @@ public class Table {
         for (Chair c: chairs) {
             c.draw(g);
         }
+    }
+
+    public void update(int x, int y, int amountOfChairs){
+        this.x = x;
+        this.y = y;
+
+        chairs.clear();
+        setUpChairs(amountOfChairs);
+
     }
 
     public ArrayList<Chair> getChairs() {
