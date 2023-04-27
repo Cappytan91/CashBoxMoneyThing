@@ -89,7 +89,11 @@ public class auhhhh extends javax.swing.JFrame {
         jPanel2.addMouseWheelListener(new MouseWheelListener() {
             @Override
             public void mouseWheelMoved(MouseWheelEvent e) {
-                e.getWheelRotation();
+                if(e.getWheelRotation() > 0){
+                    if(tempTable.getChairs().size() <= 1){
+                        
+                    }
+                }
             }
         });
 
@@ -104,6 +108,8 @@ public class auhhhh extends javax.swing.JFrame {
                 if(editMode){
                     tempTable.setX(e.getX());
                     tempTable.setY(e.getY());
+                    tempTable.draw(getGraphics());
+                    jPanel2.repaint();
                 }
             }
         });
