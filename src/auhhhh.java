@@ -8,6 +8,7 @@ import com.formdev.flatlaf.FlatLightLaf;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.ArrayList;
 
@@ -25,9 +26,9 @@ public class auhhhh extends javax.swing.JFrame {
         this.start = new Start();
         this.Order = "Order:";
         this.Tables = new ArrayList<Table>();
-        this.Tables.add(new Table(100, 100, 75, 75, 12));
+        this.Tables.add(new Table(100, 100, 75, 75, 12, Table.typeOfTable.CIRCLE));
         this.editMode = false;
-        this.tempTable = new Table(0, 0, 75, 75, 4);
+        this.tempTable = new Table(0, 0, 75, 75, 4, Table.typeOfTable.CIRCLE);
     }
 
     /**
@@ -77,6 +78,9 @@ public class auhhhh extends javax.swing.JFrame {
 
                 }
 
+
+                Image image = Toolkit.getDefaultToolkit().getImage("src/res/maro.jpg");
+                g.drawImage(image, 50, 50, this);
                 //draw circle outline
                 //g.drawOval(50,50,100,100);
 
@@ -94,9 +98,13 @@ public class auhhhh extends javax.swing.JFrame {
             @Override
             public void mouseWheelMoved(MouseWheelEvent e) {
                 if(e.getWheelRotation() > 0){
-                    if(tempTable.getChairs().size() <= 1){
-                        tempTable.updateChairs(tempTable.getChairs().size() - 1);
+                    if(!(tempTable.getChairs().size() < 3)){
+                        tempTable.updateChairs(tempTable.getChairs().size() - 2);
+                        jPanel2.repaint();
                     }
+                } else if (e.getWheelRotation() < 0) {
+                    tempTable.updateChairs(tempTable.getChairs().size());
+                    jPanel2.repaint();
                 }
             }
         });
@@ -110,7 +118,7 @@ public class auhhhh extends javax.swing.JFrame {
             @Override
             public void mouseMoved(MouseEvent e) {
                 if(editMode){
-                    tempTable.update(e.getX(), e.getY(), 5);
+                    tempTable.update(e.getX() - tempTable.getWidth() / 2, e.getY() - tempTable.getWidth() / 2, tempTable.getChairs().size()-1);
                     //tempTable.draw(jPanel2.getGraphics());
                     jPanel2.repaint();
                 }
@@ -130,20 +138,30 @@ public class auhhhh extends javax.swing.JFrame {
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                for (Table t: Tables) {
-                    if(t.coliding(e)){
-                        System.out.println("Pressed :)");
-                        if(t.heyo){
-                            t.heyo = false;
-                        }else{
-                            t.heyo = true;
+                if(SwingUtilities.isLeftMouseButton(e)) {
+                    for (Table t : Tables) {
+                        if (t.coliding(e)) {
+                            System.out.println("Pressed :)");
+                            if (t.heyo) {
+                                t.heyo = false;
+                            } else {
+                                t.heyo = true;
+                            }
+                        }
+                    }
+                    if (editMode){
+                        Tables.add(new Table(e.getX() - 75 / 2, e.getY() - 75 / 2, 75, 75, tempTable.getChairs().size()-1, tempTable.type));
+                    }
+                } else if (SwingUtilities.isRightMouseButton(e)) {
+                    if (editMode){
+                        if (tempTable.type == Table.typeOfTable.CIRCLE){
+                            tempTable.type = Table.typeOfTable.SQUARE;
+                        } else if (tempTable.type == Table.typeOfTable.SQUARE) {
+                            tempTable.type = Table.typeOfTable.CIRCLE;
                         }
                     }
                 }
 
-                if (editMode){
-                    Tables.add(new Table(e.getX() - 75 / 2, e.getY() - 75 / 2, 75, 75, 5));
-                }
 
                 jPanel2.repaint();
 
@@ -727,7 +745,7 @@ public class auhhhh extends javax.swing.JFrame {
                 String[] arr = strLine.split("\\s*,\\s*");
 
 
-                Tables.add(new Table(Integer.parseInt(arr[0]), Integer.parseInt(arr[1]), Integer.parseInt(arr[2]), Integer.parseInt(arr[3]), Integer.parseInt(arr[4])));
+                Tables.add(new Table(Integer.parseInt(arr[0]), Integer.parseInt(arr[1]), Integer.parseInt(arr[2]), Integer.parseInt(arr[3]), Integer.parseInt(arr[4]), Table.typeOfTable.CIRCLE));
                 jPanel2.repaint();
             }
             //Close the input stream

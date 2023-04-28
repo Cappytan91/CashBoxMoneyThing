@@ -8,14 +8,20 @@ public class Table {
     private ArrayList<Chair> chairs;
     public boolean heyo;
     private Graphics g;
+    enum typeOfTable{
+        CIRCLE,
+        SQUARE
+    };
+    typeOfTable type;
 
-    public Table(int x, int y, int width, int height, int amountOfChairs){
+    public Table(int x, int y, int width, int height, int amountOfChairs, typeOfTable type){
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
         this.chairs = new ArrayList<Chair>();
         this.heyo = false;
+        this.type = type;
         setUpChairs(amountOfChairs);
     }
 
@@ -35,6 +41,7 @@ public class Table {
     }
 
     public void updateChairs(int amountOfChairs){
+        chairs.clear();
         setUpChairs(amountOfChairs);
     }
 
@@ -48,13 +55,20 @@ public class Table {
     }
 
     public void draw(Graphics g){
-        if(heyo){
+        if(heyo && type == typeOfTable.CIRCLE){
             g.setColor(Color.GREEN);
             g.fillOval(x,y,width,height);
+        } else if (heyo && type == typeOfTable.SQUARE) {
+            g.setColor(Color.GREEN);
+            g.fillRect(x, y, width, height);
         }
         g.setColor(Color.BLACK);
 
-        g.drawOval(x, y, width, height);
+        if(type == typeOfTable.CIRCLE)
+            g.drawOval(x, y, width, height);
+        else if (type == typeOfTable.SQUARE) {
+            g.drawRect(x, y, width, height);
+        }
         for (Chair c: chairs) {
             c.draw(g);
         }
