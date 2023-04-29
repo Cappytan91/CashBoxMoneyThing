@@ -80,7 +80,7 @@ public class auhhhh extends javax.swing.JFrame {
 
 
                 Image image = Toolkit.getDefaultToolkit().getImage("src/res/maro.jpg");
-                g.drawImage(image, 50, 50, this);
+                //g.drawImage(image, 50, 50, this);
                 //draw circle outline
                 //g.drawOval(50,50,100,100);
 
@@ -713,7 +713,7 @@ public class auhhhh extends javax.swing.JFrame {
             File file = new File("tableLayout.txt");
             output = new BufferedWriter(new FileWriter(file));
             for (Table t: Tables) {
-                output.write(t.getX() +", " + t.getY() + ", " + t.getWidth() + ", " + t.getHeight() + ", " + (t.getChairs().size() - 1) + "\n");
+                output.write(t.getX() +", " + t.getY() + ", " + t.getWidth() + ", " + t.getHeight() + ", " + (t.getChairs().size() - 1) + ", " + t.type + "\n");
             }
             output.close();
         } catch ( IOException e ) {
@@ -745,7 +745,7 @@ public class auhhhh extends javax.swing.JFrame {
                 String[] arr = strLine.split("\\s*,\\s*");
 
 
-                Tables.add(new Table(Integer.parseInt(arr[0]), Integer.parseInt(arr[1]), Integer.parseInt(arr[2]), Integer.parseInt(arr[3]), Integer.parseInt(arr[4]), Table.typeOfTable.CIRCLE));
+                Tables.add(new Table(Integer.parseInt(arr[0]), Integer.parseInt(arr[1]), Integer.parseInt(arr[2]), Integer.parseInt(arr[3]), Integer.parseInt(arr[4]), convertToEnum(arr[5])));
                 jPanel2.repaint();
             }
             //Close the input stream
@@ -763,6 +763,18 @@ public class auhhhh extends javax.swing.JFrame {
             editMode = true;
         }
         jPanel2.repaint();
+    }
+
+    private Table.typeOfTable convertToEnum(String s){
+        Table.typeOfTable tempTypeOfTable = null;
+
+        if(s.toLowerCase().equals("circle")){
+            tempTypeOfTable = Table.typeOfTable.CIRCLE;
+        } else if(s.toLowerCase().equals("square")) {
+            tempTypeOfTable = Table.typeOfTable.SQUARE;
+        }
+
+        return tempTypeOfTable;
     }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
