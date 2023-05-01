@@ -117,6 +117,12 @@ public class auhhhh extends javax.swing.JFrame {
 
             @Override
             public void mouseMoved(MouseEvent e) {
+                for (Table t: Tables) {
+                    if(t.coliding(e) && t.getOrder() != null){
+
+                    }
+                }
+
                 if(editMode){
                     tempTable.update(e.getX() - tempTable.getWidth() / 2, e.getY() - tempTable.getWidth() / 2, tempTable.getChairs().size()-1);
                     //tempTable.draw(jPanel2.getGraphics());

@@ -8,6 +8,7 @@ public class Table {
     private ArrayList<Chair> chairs;
     public boolean heyo;
     private Graphics g;
+    private Menu order;
     enum typeOfTable{
         CIRCLE,
         SQUARE
@@ -22,6 +23,7 @@ public class Table {
         this.chairs = new ArrayList<Chair>();
         this.heyo = false;
         this.type = type;
+        this.order = null;
         setUpChairs(amountOfChairs);
     }
 
@@ -106,5 +108,13 @@ public class Table {
 
     public void setY(int y) {
         this.y = y;
+    }
+
+    public Menu getOrder() {
+        return order;
+    }
+
+    public void setOrder(Menu order) {
+        this.order = order;
     }
 }
